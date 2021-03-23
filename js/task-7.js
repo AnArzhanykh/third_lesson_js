@@ -90,7 +90,7 @@ const account = {
 
 
         console.log('Такого id не найдено');
-        return 
+        return  'Такого id не найдено'
     },
 
     /*
@@ -105,8 +105,8 @@ const account = {
 
             }
         }
+        console.log(moneyTransition);
         return moneyTransition;
-        
     },
 };
 
@@ -130,5 +130,5 @@ account.getTransactionTotal('withdraw')
 console.log(account.createTransaction(23 , 424));
 console.log(account.transactions);
 
-const a = account.getTransactionTotal('withdraw')
-console.log(a);
+account.getTransactionTotal('withdraw');
+

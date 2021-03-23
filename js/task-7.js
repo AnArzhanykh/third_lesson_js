@@ -23,16 +23,17 @@ const account = {
      * Принимает сумму и тип транзакции.
      */
     createTransaction(amount, type) {
-        // const newId =  Math.floor(Date.now() + Math.random() * (100 - 10) + 10) ;
-        let newId = 2;
-        (type === 'deposit') ? newId = newId+ 1: newId;
+        const newId =  Math.floor(Date.now() + Math.random() * (100 - 10) + 10) ;
+        // let newId = 2;
+        // (type === 'deposit') ? newId = newId+ 1: newId;
         
         const newTransaction = {
             id: newId, 
             amount: amount,
             type: type,
         }
-        this.transactions.push(newTransaction);
+        return newTransaction
+        // this.transactions.push(newTransaction);
     },
 
     /*
@@ -43,7 +44,8 @@ const account = {
      */
     deposit(amount) {
         this.balance += amount;
-        this.createTransaction(amount, Transaction.DEPOSIT);
+        const transaction = this.createTransaction(amount, Transaction.DEPOSIT);
+        this.transactions.push(transaction);
         return console.log(` Вы поплнили баланс на ${amount}`);
     },
 
@@ -59,7 +61,8 @@ const account = {
     withdraw(amount) {
         if(amount >  this.balance) console.log('У Вас недостаточно средств на счету');
         this.balance -= amount;
-        this.createTransaction(amount, Transaction.WITHDRAW);
+        const transaction = this.createTransaction(amount, Transaction.WITHDRAW);
+        this.transactions.push(transaction);
         return console.log(` Вы сняли сумму ${amount}`);
     },
 
@@ -122,4 +125,7 @@ console.log(account.transactions);
 account.getTransactionTotal('deposit')
 account.getTransactionTotal('withdraw')
 
+
+console.log(account.createTransaction(23 , 424));
+console.log(account.transactions);
 

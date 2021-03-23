@@ -1,11 +1,15 @@
+// const countProps = function(obj) {
+//     let count = 0;
+//     for(const key in obj){
+//        count += 1;
+//     }
+//     return count;
+//     // твой код
+// };
+
 const countProps = function(obj) {
-    let count = 0;
-    for(const key in obj){
-       count += 1;
-    }
-    return count;
-    // твой код
-};
+   return Object.keys(obj).length
+}
 
 /*
    * Вызовы функции для проверки работоспособности твоей реализации.

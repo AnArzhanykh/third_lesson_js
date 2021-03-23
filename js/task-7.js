@@ -25,13 +25,11 @@ const account = {
     createTransaction(amount, type) {
         const newId =  Math.floor(Date.now() + Math.random() * (100 - 10) + 10) ;
 
-        const newTransaction = {
+        return {
             id: newId, 
             amount: amount,
             type: type,
         }
-        return newTransaction
-        // this.transactions.push(newTransaction);
     },
 
     /*

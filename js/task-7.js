@@ -24,9 +24,7 @@ const account = {
      */
     createTransaction(amount, type) {
         const newId =  Math.floor(Date.now() + Math.random() * (100 - 10) + 10) ;
-        // let newId = 2;
-        // (type === 'deposit') ? newId = newId+ 1: newId;
-        
+
         const newTransaction = {
             id: newId, 
             amount: amount,
@@ -46,7 +44,7 @@ const account = {
         this.balance += amount;
         const transaction = this.createTransaction(amount, Transaction.DEPOSIT);
         this.transactions.push(transaction);
-        return console.log(` Вы поплнили баланс на ${amount}`);
+        console.log(` Вы поплнили баланс на ${amount}`);
     },
 
     /*
@@ -59,11 +57,14 @@ const account = {
      * о том, что снятие такой суммы не возможно, недостаточно средств.
      */
     withdraw(amount) {
-        if(amount >  this.balance) console.log('У Вас недостаточно средств на счету');
+        if(amount >  this.balance) {
+            console.log('У Вас недостаточно средств на счету');
+            return
+        } 
         this.balance -= amount;
         const transaction = this.createTransaction(amount, Transaction.WITHDRAW);
         this.transactions.push(transaction);
-        return console.log(` Вы сняли сумму ${amount}`);
+        console.log(` Вы сняли сумму ${amount}`);
     },
 
     /*
@@ -79,19 +80,17 @@ const account = {
     getTransactionDetails(id) {
         let foundObject = null
 
-        for(const idKey of this.transactions){
-            if(idKey.id === id) {
-                foundObject = idKey;
+        for(const transaction of this.transactions){
+            if(transaction.id === id) {
+                foundObject = transaction;
                 console.log(foundObject);
-                break
+                return foundObject
             } 
         }
 
-        if(foundObject === null){
-            console.log('Такого id не найдено');
-        } 
 
-        return foundObject
+        console.log('Такого id не найдено');
+        return 
     },
 
     /*
@@ -100,12 +99,14 @@ const account = {
      */
     getTransactionTotal(type) {
         let moneyTransition = 0;
-        for(const value of this.transactions) {
-            if(value.type === type){
-                moneyTransition += value.amount;
+        for(const transacrion of this.transactions) {
+            if(transacrion.type === type){
+                moneyTransition += transacrion.amount;
+
             }
         }
-        console.log(moneyTransition);
+        return moneyTransition;
+        
     },
 };
 
@@ -129,3 +130,5 @@ account.getTransactionTotal('withdraw')
 console.log(account.createTransaction(23 , 424));
 console.log(account.transactions);
 
+const a = account.getTransactionTotal('withdraw')
+console.log(a);
